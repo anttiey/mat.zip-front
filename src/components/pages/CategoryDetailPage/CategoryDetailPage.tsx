@@ -1,9 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { useContext } from "react";
-import { MdArrowBackIos } from "react-icons/md";
 import { useInfiniteQuery } from "react-query";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import { Campus, CategoryId, Store } from "types/common";
 
 import { NETWORK, SIZE, FILTERS } from "constants/api";
@@ -28,8 +27,6 @@ import StoreList from "components/common/StoreList/StoreList";
 import * as S from "components/pages/CategoryDetailPage/CategoryDetailPage.style";
 
 function CategoryDetailPage() {
-  const navigate = useNavigate();
-
   const campusName = useContext(campusContext);
   const campusId = getCampusId(campusName as Campus);
   const { categoryId } = useParams();
@@ -84,14 +81,7 @@ function CategoryDetailPage() {
 
   return (
     <S.CategoryDetailPageContainer>
-      <SectionHeader
-        leadingIcon={<MdArrowBackIos />}
-        onClick={() => {
-          navigate(-1);
-        }}
-      >
-        {categoryName || "%ERROR%"}
-      </SectionHeader>
+      <SectionHeader>{categoryName || "%ERROR%"}</SectionHeader>
       <S.ChipContainer>
         {FILTERS.map((chip, index) => (
           <Chip

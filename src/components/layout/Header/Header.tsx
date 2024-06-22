@@ -1,7 +1,8 @@
 import MenuDrawer from "../MenuDrawer/MenuDrawer";
 import { useContext, useEffect, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { Link, useLocation } from "react-router-dom";
+import { MdArrowBackIos } from "react-icons/md";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { PATHNAME } from "constants/routes";
 
@@ -20,15 +21,20 @@ function Header() {
   const campus = useContext(campusContext);
 
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const openMenu = () => {
+    setMenuOpen(true);
+  };
   const closeMenu = () => {
     setMenuOpen(false);
   };
 
-  const location = useLocation();
-
-  const openMenu = () => {
-    setMenuOpen(true);
+  const navigate = useNavigate();
+  const goBack = () => {
+    navigate(-1);
   };
+
+  const location = useLocation();
+  const isMainPage = location.pathname === PATHNAME.HOME;
 
   const handleIconClick = () => {
     window.scrollTo({
@@ -44,15 +50,24 @@ function Header() {
   return (
     <S.Container>
       <S.TopWrapper>
-        <Link to={PATHNAME.HOME} onClick={handleIconClick}>
-          <S.PageName>
-            <S.LogoWrapper>
-              <S.LogoImage src={logoImg} alt="MAT.ZIP 로고 이미지" />
-              <img src={logoText} alt="MAT.ZIP 로고 텍스트" />
-            </S.LogoWrapper>
-            {campus && <S.Campus> in {campus}</S.Campus>}
-          </S.PageName>
-        </Link>
+        <S.LeftWrapper>
+          {!isMainPage && (
+            <S.BackButton onClick={goBack}>
+              <MdArrowBackIos />
+            </S.BackButton>
+          )}
+          <Link to={PATHNAME.HOME} onClick={handleIconClick}>
+            <S.PageName>
+              <S.LogoWrapper>
+                {isMainPage && (
+                  <S.LogoImage src={logoImg} alt="MAT.ZIP 로고 이미지" />
+                )}
+                <S.LogoText src={logoText} alt="MAT.ZIP 로고 텍스트" />
+              </S.LogoWrapper>
+              {campus && <S.Campus> in {campus}</S.Campus>}
+            </S.PageName>
+          </Link>
+        </S.LeftWrapper>
         <S.RightWrapper>
           <S.MenuButton onClick={openMenu}>
             <GiHamburgerMenu />

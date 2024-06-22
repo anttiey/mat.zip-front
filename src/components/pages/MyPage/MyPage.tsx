@@ -1,9 +1,7 @@
 import * as S from "./MyPage.style";
 import MyReviewItem from "./MyReviewItem/MyReviewItem";
 import UserProfile from "./UserProfile/UserProfile";
-import { MdArrowBackIos } from "react-icons/md";
 import { useQuery } from "react-query";
-import { useNavigate } from "react-router-dom";
 
 import { NETWORK, SIZE } from "constants/api";
 import { PATHNAME } from "constants/routes";
@@ -22,8 +20,6 @@ import StoreList from "components/common/StoreList/StoreList";
 import Text from "components/common/Text/Text";
 
 function MyPage() {
-  const navigate = useNavigate();
-
   const {
     data: profileData,
     isLoading,
@@ -54,14 +50,7 @@ function MyPage() {
 
   return (
     <S.Container>
-      <SectionHeader
-        leadingIcon={<MdArrowBackIos />}
-        onClick={() => {
-          navigate(-1);
-        }}
-      >
-        마이페이지
-      </SectionHeader>
+      <SectionHeader>마이페이지</SectionHeader>
       <section>
         {isLoading && <Spinner />}
         {isError && error instanceof Error && (

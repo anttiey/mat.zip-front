@@ -31,6 +31,12 @@ export const TopWrapper = styled.div`
   justify-content: space-between;
 `;
 
+export const LeftWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+`;
+
 export const PageName = styled.h1`
   width: fit-content;
 
@@ -48,6 +54,23 @@ export const LogoWrapper = styled.div`
 
 export const LogoImage = styled(Image)`
   width: 3rem;
+`;
+
+export const LogoText = styled(Image)`
+  width: 8.3rem;
+  height: 3rem;
+`;
+
+export const BackButton = styled.button`
+  border: none;
+  background-color: transparent;
+  width: 3rem;
+  height: 3rem;
+
+  & > svg {
+    width: 20px;
+    height: 20px;
+  }
 `;
 
 export const Campus = styled(Text).attrs({ as: "span" })`
