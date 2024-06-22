@@ -5,7 +5,8 @@ import { Link, useLocation } from "react-router-dom";
 
 import { PATHNAME } from "constants/routes";
 
-import logoImg from "asset/logo-light.svg";
+import logoImg from "asset/logo-light-image.svg";
+import logoText from "asset/logo-light-text.svg";
 
 import { campusContext } from "context/CampusContextProvider";
 import { LoginContext } from "context/LoginContextProvider";
@@ -45,7 +46,10 @@ function Header() {
       <S.TopWrapper>
         <Link to={PATHNAME.HOME} onClick={handleIconClick}>
           <S.PageName>
-            <S.LogoImage src={logoImg} alt="MAT.ZIP logo" />
+            <S.LogoWrapper>
+              <S.LogoImage src={logoImg} alt="MAT.ZIP 로고 이미지" />
+              <img src={logoText} alt="MAT.ZIP 로고 텍스트" />
+            </S.LogoWrapper>
             {campus && <S.Campus> in {campus}</S.Campus>}
           </S.PageName>
         </Link>

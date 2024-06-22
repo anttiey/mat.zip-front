@@ -41,8 +41,13 @@ export const PageName = styled.h1`
   font-size: 1.25rem;
 `;
 
+export const LogoWrapper = styled.div`
+  display: flex;
+  gap: 0.8rem;
+`;
+
 export const LogoImage = styled(Image)`
-  width: 12rem;
+  width: 3rem;
 `;
 
 export const Campus = styled(Text).attrs({ as: "span" })`
