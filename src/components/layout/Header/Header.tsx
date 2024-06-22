@@ -35,6 +35,9 @@ function Header() {
 
   const location = useLocation();
   const isMainPage = location.pathname === PATHNAME.HOME;
+  const isCategoryDetailPage = location.pathname.startsWith(
+    PATHNAME.CATEGORY_DETAIL
+  );
 
   const handleIconClick = () => {
     window.scrollTo({
@@ -77,7 +80,7 @@ function Header() {
           )}
         </S.RightWrapper>
       </S.TopWrapper>
-      <SearchBar />
+      {(isMainPage || isCategoryDetailPage) && <SearchBar />}
     </S.Container>
   );
 }
