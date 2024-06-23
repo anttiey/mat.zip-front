@@ -97,41 +97,39 @@ function StoreDetailPage() {
           <Heading size="xs">리뷰</Heading>
           <S.ReviewListWrapper>
             <InfiniteScroll handleContentLoad={loadMoreReviews} hasMore={true}>
-              {(isLoading || isFetching) && <Spinner />}
               {isError && error instanceof Error && (
                 <ErrorImage errorMessage={error.message} />
               )}
-              {reviews.length ? (
-                reviews.map(
-                  ({
-                    id,
-                    author,
-                    rating,
-                    content,
-                    menu,
-                    imageUrl,
-                    updatable,
-                  }) => (
-                    <Fragment key={id}>
-                      <StoreReviewItem
-                        reviewInfo={{
-                          restaurantId,
-                          id,
-                          author,
-                          rating,
-                          content,
-                          menu,
-                          imageUrl,
-                          updatable,
-                        }}
-                      />
-                      <Divider />
-                    </Fragment>
+              {reviews.length
+                ? reviews.map(
+                    ({
+                      id,
+                      author,
+                      rating,
+                      content,
+                      menu,
+                      imageUrl,
+                      updatable,
+                    }) => (
+                      <Fragment key={id}>
+                        <StoreReviewItem
+                          reviewInfo={{
+                            restaurantId,
+                            id,
+                            author,
+                            rating,
+                            content,
+                            menu,
+                            imageUrl,
+                            updatable,
+                          }}
+                        />
+                        <Divider />
+                      </Fragment>
+                    )
                   )
-                )
-              ) : (
-                <ErrorText>작성된 리뷰가 없습니다.</ErrorText>
-              )}
+                : !isFetching && <ErrorText>작성된 리뷰가 없습니다.</ErrorText>}
+              {(isLoading || isFetching) && <Spinner position="static" />}
             </InfiniteScroll>
           </S.ReviewListWrapper>
         </S.ReviewListContainer>
