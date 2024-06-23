@@ -1,4 +1,4 @@
-import { Fragment, useContext, useState } from "react";
+import { Fragment, useContext, useState, useRef, useEffect } from "react";
 import { useInfiniteQuery, useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import { ReviewShape } from "types/common";
@@ -30,16 +30,23 @@ import StoreReviewItem from "components/pages/StoreDetailPage/StoreReviewItem/St
 
 function StoreDetailPage() {
   const { storeId: restaurantId } = useParams();
-  const [isReviewOpen, setIsReviewOpen] = useState(false);
-  const isLoggedIn = useContext(LoginContext);
+  const previousRestaurantId = useRef<string | undefined | null>(null);
+
+  useEffect(() => {
+    previousRestaurantId.current = restaurantId;
+  }, [restaurantId]);
 
   const { data: storeData, isFetching: isStoreFetching } = useQuery(
     "storeDetailInfo",
     () => fetchStoreDetail(restaurantId as string),
     {
       retry: NETWORK.RETRY_COUNT,
+      enabled: restaurantId !== previousRestaurantId.current,
     }
   );
+
+  const [isReviewOpen, setIsReviewOpen] = useState(false);
+  const isLoggedIn = useContext(LoginContext);
 
   const {
     data,
