@@ -24,6 +24,7 @@ import Spinner from "components/common/Spinner/Spinner";
 
 import ReviewInputBottomSheet from "components/pages/StoreDetailPage/ReviewInputBottomSheet/ReviewInputBottomSheet";
 import * as S from "components/pages/StoreDetailPage/StoreDetailPage.style";
+import StoreDetailSkeleton from "components/pages/StoreDetailPage/StoreDetailSkeleton/StoreDetailSkeleton";
 import StoreDetailTitle from "components/pages/StoreDetailPage/StoreDetailTitle/StoreDetailTitle";
 import StoreReviewItem from "components/pages/StoreDetailPage/StoreReviewItem/StoreReviewItem";
 
@@ -32,7 +33,7 @@ function StoreDetailPage() {
   const [isReviewOpen, setIsReviewOpen] = useState(false);
   const isLoggedIn = useContext(LoginContext);
 
-  const { data: storeData } = useQuery(
+  const { data: storeData, isFetching: isStoreFetching } = useQuery(
     "storeDetailInfo",
     () => fetchStoreDetail(restaurantId as string),
     {
@@ -76,6 +77,7 @@ function StoreDetailPage() {
     ) || [];
 
   if (!restaurantId || !storeData) return null;
+  if (isStoreFetching) return <StoreDetailSkeleton />;
   return (
     <S.StoreDetailPageContainer>
       <S.StorePreviewImage
