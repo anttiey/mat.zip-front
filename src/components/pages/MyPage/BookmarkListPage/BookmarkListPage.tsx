@@ -5,8 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { NETWORK } from "constants/api";
 import { PATHNAME } from "constants/routes";
 
-import { LeftIcon } from "asset";
-
 import fetchBookmarkList from "api/bookmark/fetchBookmarkList";
 
 import Button from "components/common/Button/Button";
@@ -33,7 +31,7 @@ function BookmarkListPage() {
   return (
     <S.Container>
       <S.HeaderWrapper>
-        <LeftIcon onClick={() => navigate(-1)} />
+        <div></div>
         <Text css={S.headerStyle}>나의 맛집</Text>
         <Button
           css={S.headerButtonStyle}
